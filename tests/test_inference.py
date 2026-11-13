@@ -54,6 +54,10 @@ class InferenceTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 Predictor(folder)
 
+    def test_portable_newlines(self):
+        for name in ['metadata.json','preprocessing.json','verification.json']:
+            self.assertNotIn(b'\r\n',(ROOT/'model'/name).read_bytes())
+
     def test_only_aggregate_model_artifacts(self):
         self.assertEqual(set(p.name for p in (ROOT/'model').iterdir()),
             {'metadata.json','preprocessing.json','xgboost.json','verification.json'})

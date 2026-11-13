@@ -98,7 +98,7 @@
   },
   "artifact_sha256": {
     "xgboost.json": "8ded707da3219e9a6b051ec76dda3fcd9108c2626c5d5b57934de2c2da7e2f21",
-    "preprocessing.json": "81f2672cf006567d18a43fa096a0586ffb23e0d27699d5be18168b9f4b9b9620"
+    "preprocessing.json": "c28b9dca4c09879d2b48d18a8beffa1db4f572fb5c2d79f247ad3347519f5e39"
   },
   "limitations": [
     "Somente vinculos com cancelamento ou conclusao observados.",
