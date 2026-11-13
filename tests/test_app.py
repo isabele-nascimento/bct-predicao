@@ -19,6 +19,16 @@ class AppTests(unittest.TestCase):
         self.assertGreater(len(app.error),0)
         self.assertNotIn('result',app.session_state)
 
+    def test_evaluation_matches_metadata(self):
+        app=self.app()
+        meta=json.loads((ROOT/'model/metadata.json').read_text(encoding='utf-8'))
+        counts=app.table[0].value['Vínculos'].tolist()
+        self.assertEqual(counts,[meta['partitions'][key]['n'] for key in ('train','validation','test')])
+        matrix=app.table[1].value
+        self.assertEqual(matrix['Predito: conclusão'].tolist(),[meta['test_metrics']['tn'],meta['test_metrics']['fn']])
+        self.assertEqual(matrix['Predito: cancelamento'].tolist(),[meta['test_metrics']['fp'],meta['test_metrics']['tp']])
+        self.assertTrue(any('no teste. Brier =' in item.value for item in app.caption))
+
     def test_valid_profile_and_reset(self):
         app=self.app()
         fixture=json.loads((ROOT/'tests/synthetic_cases.json').read_text())[0]

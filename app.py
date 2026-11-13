@@ -1,5 +1,6 @@
 """Research demonstration; inputs live only in the current Streamlit session."""
 from pathlib import Path
+import logging
 import streamlit as st
 from inference import Predictor
 
@@ -28,6 +29,7 @@ def load_predictor():
 try:
     predictor = load_predictor()
 except (ValueError, OSError) as error:
+    logging.getLogger(__name__).exception('Falha ao carregar os artefatos de inferencia')
     st.error('Modelo indisponível. Os arquivos de inferência precisam ser conferidos.')
     st.stop()
 
@@ -137,16 +139,25 @@ with methods:
     meta=predictor.metadata
     st.subheader('O que foi avaliado')
     st.write('Cancelamento registrado (classe 1) versus conclusão ou formação (classe 0), entre vínculos com desfecho observado e ao menos uma disciplina avaliada no semestre de ingresso. Não há horizonte de previsão fixo.')
-    st.table({'Conjunto':['Treino','Validação','Teste'], 'Coortes':['2014–2017','2018','2019'],
-              'Vínculos':[4464,1126,1095], 'Participação':['66,8%','16,8%','16,4%']})
+    parts=[meta['partitions'][key] for key in ('train','validation','test')]
+    total=sum(p['n'] for p in parts)
+    st.table({'Conjunto':['Treino','Validação','Teste'],
+        'Coortes':[str(p['years'][0]) if len(p['years'])==1 else f"{p['years'][0]}–{p['years'][-1]}" for p in parts],
+        'Vínculos':[p['n'] for p in parts],
+        'Participação':[f"{100*p['n']/total:.1f}%".replace('.',',') for p in parts]})
     st.write('Parâmetros escolhidos por Brier em validações temporais internas. Família e limiar escolhidos na validação de 2018. XGBoost empatou com Random Forest no F1-macro dessa validação e teve menor Brier. Não foi reajustado com o teste.')
     st.subheader('Teste retrospectivo · 2019')
     c1,c2,c3=st.columns(3)
     c1.metric('ROC-AUC',f'{meta["test_metrics"]["roc_auc"]:.3f}')
     c2.metric('F1-macro',f'{meta["test_metrics"]["f1_macro"]:.3f}')
     c3.metric('AP',f'{meta["test_metrics"]["ap"]:.3f}')
-    st.caption('Referência da AP: 78,0% de cancelamentos no teste. Brier = 0,131. F1-macro e matriz de confusão usam limiar de 0,66, escolhido na validação; a simulação não emite classificação automática.')
-    st.table({'Situação observada':['Conclusão','Cancelamento'], 'Predito: conclusão':[144,133], 'Predito: cancelamento':[97,721]})
+    prevalence=f"{100*meta['test_prevalence']:.1f}%".replace('.',',')
+    brier=f"{meta['test_metrics']['brier']:.3f}".replace('.',',')
+    threshold=f"{meta['threshold']:.2f}".replace('.',',')
+    st.caption(f"Referência da AP: {prevalence} de cancelamentos no teste. Brier = {brier}. "
+        f"F1-macro e matriz de confusão usam limiar de {threshold}, escolhido na validação; a simulação não emite classificação automática.")
+    scores=meta['test_metrics']
+    st.table({'Situação observada':['Conclusão','Cancelamento'], 'Predito: conclusão':[scores['tn'],scores['fn']], 'Predito: cancelamento':[scores['fp'],scores['tp']]})
     st.image(str(ROOT/'assets/comparacao.png'),caption='Mesmos vínculos no teste. Comparação por F1-macro, com limiares escolhidos na validação.')
     with st.expander('Variáveis, pré-processamento e limites'):
         st.write('Sexo, raça/cor, cota, ingresso, escola, idade e renda; número de disciplinas, reprovações, proporção de reprovações, média de notas, média de faltas e proporção de reprovações por faltas. As duas proporções são calculadas a partir das contagens.')

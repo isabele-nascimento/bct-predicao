@@ -59,7 +59,7 @@ class Predictor:
             if name not in {'xgboost.json', 'preprocessing.json'}:
                 raise ValueError('Artefato nao reconhecido.')
             if hashlib.sha256((folder/name).read_bytes()).hexdigest() != expected:
-                raise ValueError('Artefato alterado; conferir exportacao.')
+                raise ValueError(f'Artefato alterado: {name}; conferir exportacao.')
         self.schema = json.loads((folder/'preprocessing.json').read_text(encoding='utf-8'))
         self.booster = xgb.Booster(params={'nthread': 1})
         self.booster.load_model(folder/'xgboost.json')
