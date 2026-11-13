@@ -1,0 +1,88 @@
+{
+  "categorical_columns": [
+    "sexo",
+    "raca",
+    "cotista",
+    "forma_ingresso",
+    "escola"
+  ],
+  "numeric_columns": [
+    "idade_ingresso",
+    "log_renda",
+    "disciplinas_avaliadas",
+    "numero_reprovacoes",
+    "proporcao_reprovacoes",
+    "media_notas",
+    "media_faltas",
+    "proporcao_reprovacoes_faltas"
+  ],
+  "categories": [
+    [
+      "F",
+      "M",
+      "NAO_INFORMADO"
+    ],
+    [
+      "AMARELO (DE ORIGEM ORIENTAL)",
+      "BRANCO",
+      "INDIGENA",
+      "NAO_INFORMADO",
+      "NEGRO",
+      "PARDO",
+      "REMANESCENTE DE QUILOMBO"
+    ],
+    [
+      "NAO",
+      "SIM"
+    ],
+    [
+      "ACORDO TIMOR-LESTE",
+      "CONVENIO PEC-G",
+      "JUDICIAL",
+      "REOCUPACAO DE VAGAS RESIDUAIS",
+      "SISU",
+      "TRANSF. COMPULSORIA"
+    ],
+    [
+      "EM ESCOLA PARTICULAR, COM BOLSA",
+      "NAO_INFORMADO",
+      "OUTRO TIPO DE ESCOLA",
+      "PARTE EM ESCOLA PUBLICA PARTE EM ESCOLA PARTICULAR",
+      "TODO EM ESCOLA PARTICULAR",
+      "TODO EM ESCOLA PUBLICA"
+    ]
+  ],
+  "categorical_missing": "NAO_INFORMADO",
+  "numeric_medians": [
+    20.0,
+    7.496097345175956,
+    6.0,
+    2.0,
+    0.3333333333333333,
+    4.833333333333333,
+    3.0,
+    0.0
+  ],
+  "numeric_means": [
+    21.943548387096776,
+    7.507959742146735,
+    5.448028673835125,
+    2.138664874551971,
+    0.4054020346191045,
+    4.610004666965352,
+    6.198175438783638,
+    0.1134008576548899
+  ],
+  "numeric_scales": [
+    5.826681579880761,
+    0.6269743667561315,
+    1.425096885055293,
+    1.9267015499556044,
+    0.35066091708128,
+    2.340194347914156,
+    8.205542005000547,
+    0.2297318613575101
+  ],
+  "unknown_category": "all_zero",
+  "output_features": 32
+}

@@ -1,0 +1,47 @@
+[
+  {
+    "profile": {
+      "sexo": "F",
+      "raca": "PARDO",
+      "cotista": "SIM",
+      "forma_ingresso": "SISU",
+      "escola": "TODO EM ESCOLA PUBLICA",
+      "idade_ingresso": 20,
+      "renda": 1500,
+      "disciplinas_avaliadas": 6,
+      "numero_reprovacoes": 1,
+      "reprovacoes_faltas": 0,
+      "media_notas": 7.0,
+      "media_faltas": 2.0
+    },
+    "probability": 0.3999316394329071,
+    "origin": "perfil ficticio, nao extraido da base"
+  },
+  {
+    "profile": {
+      "sexo": "M",
+      "raca": "BRANCO",
+      "cotista": "NAO",
+      "forma_ingresso": "SISU",
+      "escola": "TODO EM ESCOLA PARTICULAR",
+      "idade_ingresso": 28,
+      "renda": 2500,
+      "disciplinas_avaliadas": 5,
+      "numero_reprovacoes": 4,
+      "reprovacoes_faltas": 2,
+      "media_notas": 3.0,
+      "media_faltas": 10.0
+    },
+    "probability": 0.9782872796058655,
+    "origin": "perfil ficticio, nao extraido da base"
+  },
+  {
+    "profile": {
+      "disciplinas_avaliadas": 6,
+      "numero_reprovacoes": 2,
+      "reprovacoes_faltas": 1
+    },
+    "probability": 0.5584170818328857,
+    "origin": "perfil ficticio, nao extraido da base"
+  }
+]

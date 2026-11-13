@@ -1,0 +1,110 @@
+{
+  "version": "ufrn-xgboost-20261113",
+  "institution": "UFRN",
+  "course": "CIENCIAS E TECNOLOGIA",
+  "course_id": "10320810",
+  "target": "CANCELADO (1) versus CONCLUIDO/FORMADO (0), desfecho observado",
+  "academic_period": "semestre de ingresso",
+  "threshold": 0.66,
+  "parameters": {
+    "balance": false,
+    "learning_rate": 0.03,
+    "max_depth": 2
+  },
+  "fixed_parameters": {
+    "n_estimators": 300,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "reg_lambda": 1,
+    "tree_method": "hist"
+  },
+  "partitions": {
+    "train": {
+      "years": [
+        2014,
+        2015,
+        2016,
+        2017
+      ],
+      "n": 4464
+    },
+    "validation": {
+      "years": [
+        2018
+      ],
+      "n": 1126
+    },
+    "test": {
+      "years": [
+        2019
+      ],
+      "n": 1095
+    }
+  },
+  "test_metrics": {
+    "f1_macro": 0.7092123736860578,
+    "ap": 0.941932837468529,
+    "roc_auc": 0.8231534297958351,
+    "brier": 0.1306825131177902,
+    "precisao": 0.8814180929095354,
+    "recall": 0.8442622950819673,
+    "n": 1095,
+    "tp": 721,
+    "fp": 97,
+    "fn": 133,
+    "tn": 144,
+    "positivos": 854
+  },
+  "test_prevalence": 0.7799086757990867,
+  "training_ranges": {
+    "idade_ingresso": [
+      16.0,
+      62.0
+    ],
+    "log_renda": [
+      0.0,
+      14.346139397261563
+    ],
+    "disciplinas_avaliadas": [
+      1.0,
+      9.0
+    ],
+    "numero_reprovacoes": [
+      0.0,
+      7.0
+    ],
+    "proporcao_reprovacoes": [
+      0.0,
+      1.0
+    ],
+    "media_notas": [
+      0.0,
+      9.7
+    ],
+    "media_faltas": [
+      0.0,
+      80.0
+    ],
+    "proporcao_reprovacoes_faltas": [
+      0.0,
+      1.0
+    ]
+  },
+  "training_versions": {
+    "xgboost": "3.1.2",
+    "numpy": "2.4.6",
+    "pandas": "3.0.3",
+    "scikit-learn": "1.9.0"
+  },
+  "artifact_sha256": {
+    "xgboost.json": "8ded707da3219e9a6b051ec76dda3fcd9108c2626c5d5b57934de2c2da7e2f21",
+    "preprocessing.json": "81f2672cf006567d18a43fa096a0586ffb23e0d27699d5be18168b9f4b9b9620"
+  },
+  "limitations": [
+    "Somente vinculos com cancelamento ou conclusao observados.",
+    "Falta de datas de cancelamento impede garantir a antecedencia dos indicadores.",
+    "Teste consultado anteriormente; extensao exploratoria.",
+    "Nao usar como risco futuro validado ou para decisoes individuais.",
+    "Renda: dicionario diz renda do discente no periodo, sem periodicidade explicita."
+  ]
+}
